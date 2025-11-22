@@ -8,3 +8,6 @@ your basic music player is a music player written in html, css &amp; js. it uses
 - clean UI :D
 - volume and speed adjusters
 - more coming in the future!
+
+## oh yea, & please note:
+i won't maintain this forever due to various reasons, this is an experiment. however, you may modify the code at your liking (thanks, *The Unlicence*!) and idk just do whatever you wish with it. *your stuff, your rules.*
