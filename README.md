@@ -25,4 +25,4 @@ i won't maintain this forever due to various reasons, at least, publicly on gith
 ### like this?
 visit galzstuff.github.io to know more about other proyects made by me!
 
--# art credits to some person on pinterest idk their name im sorry :(
+art credits to some person on pinterest idk their name im sorry :(
