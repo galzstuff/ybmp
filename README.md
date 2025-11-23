@@ -19,6 +19,9 @@ to start, head over to galzstuff.github.io/ybmp OR download the index.html file 
 - volume and speed adjusters
 - more coming in the future!
 
+## about beta access:
+download betas/unstable versions from the releases page under the tag beta-github or visit galzstuff.github.io/ybmp-beta to access the latest beta w/out losing stuff from the stable version
+
 ## oh yea, & please note:
 i won't maintain this forever due to various reasons, at least, publicly on github, this could be considered as a sort of experiment. however, you may modify the code at your liking (fork the code or suggest me stuff to add) (thanks, *The Unlicence*!) and idk just do whatever you wish with it. *your stuff, your rules.*
 
