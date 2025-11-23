@@ -10,4 +10,7 @@ your basic music player is a music player written in html, css &amp; js. it uses
 - more coming in the future!
 
 ## oh yea, & please note:
-i won't maintain this forever due to various reasons, this is an experiment. however, you may modify the code at your liking (thanks, *The Unlicence*!) and idk just do whatever you wish with it. *your stuff, your rules.*
+i won't maintain this forever due to various reasons, at least, publicly on github, this could be considered as a sort of experiment. however, you may modify the code at your liking (fork the code or suggest me stuff to add) (thanks, *The Unlicence*!) and idk just do whatever you wish with it. *your stuff, your rules.*
+
+### like this?
+visit galzstuff.github.io to know more about other proyects made by me!
