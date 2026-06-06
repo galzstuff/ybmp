@@ -10,8 +10,12 @@
       --bg-secondary: #151a35;
       --bg-tertiary: #1e2541;
       --accent: #6366f1;
+      --accent-end: #a855f7;
       --accent-hover: #4f46e5;
       --accent-light: rgba(99, 102, 241, 0.1);
+      --accent-shadow: rgba(99, 102, 241, 0.4);
+      --accent-overlay: rgba(99, 102, 241, 0.15);
+      --particle-color: #6366f1;
       --danger: #ef4444;
       --danger-hover: #dc2626;
       --success: #10b981;
@@ -67,7 +71,7 @@
       position: absolute;
       width: 3px;
       height: 3px;
-      background: var(--accent);
+      background: var(--particle-color);
       border-radius: 50%;
       opacity: 0.6;
       animation: float 10s infinite;
@@ -97,7 +101,7 @@
     .header h1 {
       font-size: 48px;
       font-weight: 800;
-      background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-end) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -131,7 +135,7 @@
     
     .settings-btn:hover {
       background: var(--accent);
-      color: white;
+      color: var(--text-inverse);
       transform: rotate(90deg) scale(1.1);
     }
     
@@ -204,7 +208,7 @@
     .modal-title {
       font-size: 24px;
       font-weight: 700;
-      background: linear-gradient(135deg, var(--accent) 0%, #a855f7 100%);
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-end) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -227,7 +231,7 @@
     
     .modal-close:hover {
       background: var(--danger);
-      color: white;
+      color: var(--text-inverse);
       transform: rotate(90deg);
     }
     
@@ -249,7 +253,7 @@
       content: '';
       width: 4px;
       height: 20px;
-      background: linear-gradient(to bottom, var(--accent), var(--success));
+      background: linear-gradient(to bottom, var(--accent), var(--bg-tertiary));
       border-radius: 2px;
     }
     
@@ -303,7 +307,7 @@
       left: 2px;
       width: 16px;
       height: 16px;
-      background: white;
+      background: var(--text-inverse);
       border-radius: 50%;
       transition: all 0.3s ease;
     }
@@ -356,10 +360,21 @@
     }
     
     .main-grid {
-      display: grid;
-      grid-template-columns: 380px 1fr;
-      gap: 24px;
-      animation: fadeIn 0.6s ease-out 0.2s backwards;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    
+    .reveal-section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+      will-change: opacity, transform;
+    }
+    
+    .reveal-section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     
     .card {
@@ -385,7 +400,7 @@
       content: '';
       width: 4px;
       height: 20px;
-      background: linear-gradient(to bottom, var(--accent), var(--success));
+      background: linear-gradient(to bottom, var(--accent), var(--bg-tertiary));
       border-radius: 2px;
     }
     
@@ -453,7 +468,7 @@
     
     .file-input::file-selector-button:hover {
       background: var(--accent);
-      color: white;
+      color: var(--text-inverse);
     }
     
     .btn {
@@ -471,14 +486,14 @@
     }
     
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%);
-      color: white;
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-end) 100%);
+      color: var(--text-inverse);
+      box-shadow: 0 4px 12px var(--accent-shadow);
     }
     
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+      box-shadow: 0 6px 20px var(--accent-shadow);
     }
     
     .btn-secondary {
@@ -494,7 +509,7 @@
     
     .btn-danger {
       background: var(--danger);
-      color: white;
+      color: var(--text-inverse);
     }
     
     .btn-danger:hover {
@@ -658,7 +673,7 @@
       overflow: hidden;
       margin-bottom: 24px;
       box-shadow: 0 20px 60px var(--shadow);
-      background: linear-gradient(135deg, #1e2541 0%, #2a3452 100%);
+      background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -670,7 +685,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+      background: linear-gradient(135deg, var(--accent-overlay) 0%, var(--accent-overlay) 100%);
       opacity: 0;
       transition: opacity 0.3s ease;
     }
@@ -704,16 +719,16 @@
       justify-content: space-around;
       gap: 2px;
       padding: 0 10px;
-      background: linear-gradient(to top, rgba(99, 102, 241, 0.3), transparent);
+      background: linear-gradient(to top, var(--accent-overlay), transparent);
     }
     
     .visualizer-bar {
       flex: 1;
-      background: linear-gradient(to top, var(--accent), rgba(99, 102, 241, 0.5));
+      background: linear-gradient(to top, var(--accent), var(--accent-shadow));
       border-radius: 4px 4px 0 0;
       min-height: 4px;
       transition: height 0.1s ease;
-      box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+      box-shadow: 0 0 10px var(--accent-shadow);
     }
     
     .visualizer.circular {
@@ -783,13 +798,13 @@
       border-radius: 50%;
       background: var(--accent);
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.6);
+      box-shadow: 0 2px 8px var(--accent-shadow);
       transition: all 0.3s ease;
     }
     
     input[type="range"]::-webkit-slider-thumb:hover {
       transform: scale(1.2);
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.8);
+      box-shadow: 0 4px 12px var(--accent-shadow);
     }
     
     input[type="range"]::-moz-range-thumb {
@@ -799,7 +814,7 @@
       background: var(--accent);
       cursor: pointer;
       border: none;
-      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.6);
+      box-shadow: 0 2px 8px var(--accent-shadow);
     }
     
     .volume-section {
@@ -901,7 +916,7 @@
     
     .control-btn.active {
       background: var(--accent);
-      color: white;
+      color: var(--text-inverse);
       border-color: var(--accent);
     }
     
@@ -909,14 +924,14 @@
       width: 64px;
       height: 64px;
       font-size: 24px;
-      background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%);
-      color: white;
-      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-end) 100%);
+      color: var(--text-inverse);
+      box-shadow: 0 8px 24px var(--accent-shadow);
     }
     
     .control-btn.play:hover {
       transform: scale(1.1);
-      box-shadow: 0 12px 32px rgba(99, 102, 241, 0.6);
+      box-shadow: 0 12px 32px var(--accent-shadow);
     }
     
     .track-list {
@@ -1128,7 +1143,7 @@
   <div id="particles"></div>
 
   <div class="container">
-    <div class="header">
+    <div class="header reveal-section">
       <button class="settings-btn" id="settingsBtn">⚙️</button>
       <h1 id="appTitle">gal's YBMP</h1>
       <p id="appSubtitle">(stands for Your Basic Music Player!)</p>
@@ -1185,6 +1200,102 @@
               <option value="circular">circular</option>
               <option value="wave">wave</option>
             </select>
+          </div>
+
+          <div class="setting-item">
+            <div>
+              <div class="setting-label" id="labelTheme">theme</div>
+              <div class="setting-description" id="descTheme">choose a preset or customize colors</div>
+            </div>
+            <select class="select" id="themeSelect">
+              <option value="purple">purple</option>
+              <option value="ocean">ocean</option>
+              <option value="sunset">sunset</option>
+              <option value="forest">forest</option>
+              <option value="custom">custom</option>
+            </select>
+          </div>
+
+          <div class="setting-item">
+            <div>
+              <div class="setting-label" id="labelThemeSlot">theme slot</div>
+              <div class="setting-description" id="descThemeSlot">load or save custom theme presets</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; width:100%;">
+              <select class="select" id="themeSlotSelect" style="flex:1;"></select>
+              <button class="btn btn-secondary btn-small" id="saveThemeSlotBtn">save</button>
+            </div>
+          </div>
+
+          <div class="setting-item">
+            <div>
+              <div class="setting-label" id="labelParticleCount">particle amount</div>
+              <div class="setting-description" id="descParticleCount">choose how many particles appear</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; width:100%;">
+              <input type="range" class="input" id="particleCountSlider" min="10" max="150" step="5" value="50" style="flex:1;">
+              <span id="particleCountValue">50</span>
+            </div>
+          </div>
+
+          <div class="setting-item">
+            <div>
+              <div class="setting-label" id="labelParticleSize">particle size</div>
+              <div class="setting-description" id="descParticleSize">choose the particle thickness</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; width:100%;">
+              <input type="range" class="input" id="particleSizeSlider" min="1" max="12" step="1" value="3" style="flex:1;">
+              <span id="particleSizeValue">3</span>
+            </div>
+          </div>
+
+          <div class="setting-item">
+            <div>
+              <div class="setting-label" id="labelAccentColor">accent color</div>
+            </div>
+            <input type="color" class="input" id="accentColorPicker" value="#6366f1">
+          </div>
+
+          <div class="setting-item">
+            <div>
+              <div class="setting-label" id="labelParticleColor">particle color</div>
+            </div>
+            <input type="color" class="input" id="particleColorPicker" value="#6366f1">
+          </div>
+
+          <div class="setting-item">
+            <div>
+              <div class="setting-label" id="labelBgPrimary">background primary</div>
+            </div>
+            <input type="color" class="input" id="bgPrimaryPicker" value="#0a0e27">
+          </div>
+
+          <div class="setting-item">
+            <div>
+              <div class="setting-label" id="labelBgSecondary">background secondary</div>
+            </div>
+            <input type="color" class="input" id="bgSecondaryPicker" value="#151a35">
+          </div>
+
+          <div class="setting-item">
+            <div>
+              <div class="setting-label" id="labelBgTertiary">background tertiary</div>
+            </div>
+            <input type="color" class="input" id="bgTertiaryPicker" value="#1e2541">
+          </div>
+
+          <div class="setting-item">
+            <div>
+              <div class="setting-label" id="labelTextPrimary">text primary</div>
+            </div>
+            <input type="color" class="input" id="textPrimaryPicker" value="#f8fafc">
+          </div>
+
+          <div class="setting-item">
+            <div>
+              <div class="setting-label" id="labelTextSecondary">text secondary</div>
+            </div>
+            <input type="color" class="input" id="textSecondaryPicker" value="#94a3b8">
           </div>
         </div>
 
@@ -1252,67 +1363,71 @@
       </div>
     </div>
 
-    <div class="main-grid">
-      <div class="sidebar">
-        <div class="card">
-          <div class="card-title" id="titleNewPlaylist">new playlist</div>
-          <div class="create-form">
-            <div class="form-group">
-              <label class="form-label" id="labelName">name</label>
-              <input id="newName" class="input" type="text" placeholder="my playlist">
-            </div>
-            
-            <div class="form-group">
-              <label class="form-label" id="labelCover">cover</label>
-              <input id="newCover" class="input file-input" type="file" accept="image/*">
-            </div>
-            
-            <div class="form-group">
-              <label class="form-label" id="labelFiles">audio/video files</label>
-              <input id="newFiles" class="input file-input" type="file" accept="audio/*,video/*" multiple>
-            </div>
-            
-            <button id="createBtn" class="btn btn-primary">
-              <span id="btnCreate">create playlist</span>
-            </button>
-          </div>
+    <div class="modal-overlay" id="playlistModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 class="modal-title" id="titleNewPlaylist">new playlist</h2>
+          <button class="modal-close" id="closePlaylistModal">✕</button>
         </div>
-
-        <div class="card">
-          <div class="card-title" id="titleMyPlaylists">my playlists</div>
-          <div class="action-buttons" style="margin-bottom: 16px;">
-            <button id="editListBtn" class="btn btn-secondary btn-small" data-i18n="btnEdit">edit</button>
-            <button id="deleteListBtn" class="btn btn-danger btn-small" data-i18n="btnDelete">delete</button>
+        <div class="create-form">
+          <div class="form-group">
+            <label class="form-label" id="labelName">name</label>
+            <input id="newName" class="input" type="text" placeholder="my playlist">
           </div>
-          <div id="listsContainer" class="playlist-list"></div>
-          
-          <div id="editPanel" class="edit-panel">
-            <div class="form-group">
-              <label class="form-label" id="labelNewName">new name</label>
-              <input id="editName" class="input" type="text">
-            </div>
-            <div class="form-group">
-              <label class="form-label" id="labelNewCover">new cover</label>
-              <input id="editCover" class="input file-input" type="file" accept="image/*">
-            </div>
-            <div class="form-group">
-              <label class="form-label" id="labelAddFiles">add files</label>
-              <input id="editFiles" class="input file-input" type="file" accept="audio/*,video/*" multiple>
-            </div>
-            <div class="action-buttons">
-              <button id="saveEditBtn" class="btn btn-primary btn-small" data-i18n="btnSave">save</button>
-              <button id="cancelEditBtn" class="btn btn-secondary btn-small" data-i18n="btnCancel">cancel</button>
-              <button id="cleanupBtn" class="btn btn-danger btn-small" data-i18n="btnCleanup">cleanup</button>
-            </div>
+          <div class="form-group">
+            <label class="form-label" id="labelCover">cover</label>
+            <input id="newCover" class="input file-input" type="file" accept="image/*">
+          </div>
+          <div class="form-group">
+            <label class="form-label" id="labelFiles">audio files</label>
+            <input id="newFiles" class="input file-input" type="file" accept="audio/*" multiple>
+          </div>
+          <button id="createBtn" class="btn btn-primary">
+            <span id="btnCreate">create playlist</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="confirmModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 class="modal-title" id="confirmModalTitle">Confirm</h2>
+          <button class="modal-close" id="closeConfirmModal">✕</button>
+        </div>
+        <div style="padding: 0 0 24px; color: var(--text-secondary); font-size: 14px;" id="confirmModalMessage">Are you sure?</div>
+        <div style="display:flex; justify-content:flex-end; gap:12px;">
+          <button class="btn btn-secondary btn-small" id="confirmCancelBtn">Cancel</button>
+          <button class="btn btn-primary btn-small" id="confirmConfirmBtn">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="renameModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 class="modal-title" id="renameModalTitle">Rename</h2>
+          <button class="modal-close" id="closeRenameModal">✕</button>
+        </div>
+        <div class="create-form" style="padding: 0 0 12px;">
+          <div class="form-group">
+            <label class="form-label" id="renameModalLabel">new name</label>
+            <input id="renameModalInput" class="input" type="text" placeholder="new name">
+          </div>
+          <div style="display:flex; justify-content:flex-end; gap:12px; padding-top: 12px;">
+            <button class="btn btn-secondary btn-small" id="renameCancelBtn">Cancel</button>
+            <button class="btn btn-primary btn-small" id="renameConfirmBtn">Rename</button>
           </div>
         </div>
       </div>
+    </div>
 
+    <div class="main-grid">
       <div class="player-container">
-        <div class="card">
+        <div class="card reveal-section">
           <div class="now-playing">
             <div class="album-art">
-              <img id="coverImg" src="" alt="cover" />
+              <img id="coverImg" src="" />
               <div class="visualizer-container">
                 <div class="visualizer" id="visualizer"></div>
               </div>
@@ -1342,7 +1457,7 @@
             <div class="speed-section">
               <div class="speed-bar">
                 <span class="speed-icon">⚡</span>
-                <input id="speedSlider" type="range" min="25" max="200" value="100">
+                <input id="speedSlider" type="range" min="25" max="200" step="5" value="100">
                 <span class="speed-value" id="speedValue">1.00x</span>
               </div>
             </div>
@@ -1352,13 +1467,13 @@
               <button id="prevBtn" class="control-btn" title="previous">⏮️</button>
               <button id="playBtn" class="control-btn play" title="play/Pause">▶</button>
               <button id="nextBtn" class="control-btn" title="next">⏭️</button>
-              <button id="repeatOneBtn" class="control-btn" title="repeat one">🔁</button>
-              <button id="loopListBtn" class="control-btn" title="loop playlist">🔂</button>
+              <button id="repeatOneBtn" class="control-btn" title="repeat one">🔂</button>
+              <button id="loopListBtn" class="control-btn" title="loop playlist">🔁</button>
             </div>
           </div>
         </div>
 
-        <div class="card">
+        <div class="card reveal-section">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
             <div class="card-title" style="margin: 0;" id="titleTracks">tracks</div>
             <span id="trackCount" style="color: var(--text-secondary); font-size: 13px;">&nbsp;</span>
@@ -1372,9 +1487,41 @@
           <div id="playlist" class="track-list"></div>
         </div>
       </div>
+
+      <div class="card reveal-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; gap: 12px; flex-wrap: wrap;">
+          <div class="card-title" style="margin: 0;" id="titleMyPlaylists">my playlists</div>
+          <button id="openPlaylistModal" class="btn btn-primary btn-small" data-i18n="btnCreate">+ nueva lista</button>
+        </div>
+        <div class="action-buttons" style="margin-bottom: 16px;">
+          <button id="editListBtn" class="btn btn-secondary btn-small" data-i18n="btnEdit">edit</button>
+          <button id="deleteListBtn" class="btn btn-danger btn-small" data-i18n="btnDelete">delete</button>
+        </div>
+        <div id="listsContainer" class="playlist-list"></div>
+        
+        <div id="editPanel" class="edit-panel">
+          <div class="form-group">
+            <label class="form-label" id="labelNewName">new name</label>
+            <input id="editName" class="input" type="text">
+          </div>
+          <div class="form-group">
+            <label class="form-label" id="labelNewCover">new cover</label>
+            <input id="editCover" class="input file-input" type="file" accept="image/*">
+          </div>
+          <div class="form-group">
+            <label class="form-label" id="labelAddFiles">add files</label>
+            <input id="editFiles" class="input file-input" type="file" accept="audio/*" multiple>
+          </div>
+          <div class="action-buttons">
+            <button id="saveEditBtn" class="btn btn-primary btn-small" data-i18n="btnSave">save</button>
+            <button id="cancelEditBtn" class="btn btn-secondary btn-small" data-i18n="btnCancel">cancel</button>
+            <button id="cleanupBtn" class="btn btn-danger btn-small" data-i18n="btnCleanup">cleanup</button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="footer" id="footer">
+    <div class="footer reveal-section" id="footer">
       made with love by gal ;)
     </div>
   </div>
@@ -1398,6 +1545,28 @@ const translations = {
     visualizerBars: "bars",
     visualizerCircular: "circular",
     visualizerWave: "wave",
+    labelTheme: "theme",
+    descTheme: "choose a preset or customize colors",
+    themePurple: "purple",
+    themeOcean: "ocean",
+    themeSunset: "sunset",
+    themeForest: "forest",
+    themeCustom: "custom",
+    labelAccentColor: "accent color",
+    labelParticleColor: "particle color",
+    labelThemeSlot: "theme slot",
+    descThemeSlot: "load or save custom theme presets",
+    btnSaveThemeSlot: "save slot",
+    slotCustom: "custom slot",
+    labelParticleCount: "particle amount",
+    descParticleCount: "choose how many particles appear",
+    labelParticleSize: "particle size",
+    descParticleSize: "choose the particle thickness",
+    labelBgPrimary: "background primary",
+    labelBgSecondary: "background secondary",
+    labelBgTertiary: "background tertiary",
+    labelTextPrimary: "text primary",
+    labelTextSecondary: "text secondary",
     sectionAudio: "🔊 audio",
     labelCrossfade: "crossfade",
     descCrossfade: "smooth transition between songs (3s)",
@@ -1412,12 +1581,17 @@ const translations = {
     labelKeyMute: "mute",
     keyboardHint: "💡 click on a shortcut to change it, then press the desired key",
     btnReset: "🔄 reset to default settings",
+    confirmTitle: "confirm action",
+    btnConfirm: "confirm",
+    btnRename: "rename",
+    renameTitle: "rename track",
     titleNewPlaylist: "new playlist",
     labelName: "name",
     placeholderName: "my playlist",
     labelCover: "cover",
-    labelFiles: "audio/video files",
+    labelFiles: "audio files",
     btnCreate: "create playlist",
+    btnNewPlaylist: "+ new playlist",
     titleMyPlaylists: "my playlists",
     btnEdit: "edit",
     btnDelete: "delete",
@@ -1466,6 +1640,28 @@ const translations = {
     visualizerBars: "barras",
     visualizerCircular: "circular",
     visualizerWave: "onda",
+    labelTheme: "tema",
+    descTheme: "elige un preset o personaliza los colores",
+    themePurple: "morado",
+    themeOcean: "océano",
+    themeSunset: "atardecer",
+    themeForest: "bosque",
+    themeCustom: "personalizado",
+    labelAccentColor: "color acento",
+    labelParticleColor: "color de partículas",
+    labelThemeSlot: "slot de tema",
+    descThemeSlot: "carga o guarda temas personalizados",
+    btnSaveThemeSlot: "guardar slot",
+    slotCustom: "slot personalizado",
+    labelParticleCount: "cantidad de partículas",
+    descParticleCount: "elige cuántas partículas aparecen",
+    labelParticleSize: "tamaño de partículas",
+    descParticleSize: "elige el grosor de las partículas",
+    labelBgPrimary: "fondo primario",
+    labelBgSecondary: "fondo secundario",
+    labelBgTertiary: "fondo terciario",
+    labelTextPrimary: "texto primario",
+    labelTextSecondary: "texto secundario",
     sectionAudio: "🔊 audio",
     labelCrossfade: "fundido cruzado",
     descCrossfade: "transición suave entre canciones (3s)",
@@ -1480,12 +1676,17 @@ const translations = {
     labelKeyMute: "silenciar",
     keyboardHint: "💡 haz clic en un atajo para cambiarlo, luego presiona la tecla deseada",
     btnReset: "🔄 restaurar configuración predeterminada",
+    confirmTitle: "confirmar acción",
+    btnConfirm: "confirmar",
+    btnRename: "renombrar",
+    renameTitle: "renombrar pista",
     titleNewPlaylist: "nueva lista",
     labelName: "nombre",
     placeholderName: "mi lista",
     labelCover: "portada",
-    labelFiles: "archivos de audio/video",
+    labelFiles: "archivos de audio",
     btnCreate: "crear lista",
+    btnNewPlaylist: "+ nueva lista",
     titleMyPlaylists: "mis listas",
     btnEdit: "editar",
     btnDelete: "eliminar",
@@ -1520,9 +1721,11 @@ const translations = {
 };
 
 const DB_NAME = 'YBMP_DB_v2';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 let db;
 let playlists = [];
+let themeSlots = [];
+const MAX_THEME_SLOTS = 5;
 let currentPlaylist = null;
 let currentIndex = -1;
 let audio = new Audio();
@@ -1542,6 +1745,19 @@ let settings = {
   visualizerType: 'bars',
   crossfade: false,
   normalize: false,
+  theme: 'purple',
+  themeSlot: null,
+  particleCount: 50,
+  particleSize: 3,
+  colors: {
+    accent: '#6366f1',
+    bgPrimary: '#0a0e27',
+    bgSecondary: '#151a35',
+    bgTertiary: '#1e2541',
+    textPrimary: '#f8fafc',
+    textSecondary: '#94a3b8',
+    particleColor: '#6366f1'
+  },
   keymap: {
     playpause: ' ',
     prev: 'ArrowLeft',
@@ -1549,6 +1765,45 @@ let settings = {
     volup: 'ArrowUp',
     voldown: 'ArrowDown',
     mute: 'm'
+  }
+};
+
+const themePresets = {
+  purple: {
+    accent: '#6366f1',
+    bgPrimary: '#0a0e27',
+    bgSecondary: '#151a35',
+    bgTertiary: '#1e2541',
+    textPrimary: '#f8fafc',
+    textSecondary: '#94a3b8',
+    particleColor: '#6366f1'
+  },
+  ocean: {
+    accent: '#22c55e',
+    bgPrimary: '#051622',
+    bgSecondary: '#0f3747',
+    bgTertiary: '#173f57',
+    textPrimary: '#f8fafc',
+    textSecondary: '#a8d5e2',
+    particleColor: '#22c55e'
+  },
+  sunset: {
+    accent: '#fb7185',
+    bgPrimary: '#2c0518',
+    bgSecondary: '#3f0b2c',
+    bgTertiary: '#4e0f3f',
+    textPrimary: '#f8fafc',
+    textSecondary: '#f4c7d6',
+    particleColor: '#fb7185'
+  },
+  forest: {
+    accent: '#10b981',
+    bgPrimary: '#071c10',
+    bgSecondary: '#113024',
+    bgTertiary: '#17412f',
+    textPrimary: '#f8fafc',
+    textSecondary: '#a5d6b4',
+    particleColor: '#10b981'
   }
 };
 
@@ -1580,6 +1835,25 @@ function updateLanguage() {
   visualizerOptions[1].textContent = t('visualizerCircular');
   visualizerOptions[2].textContent = t('visualizerWave');
   
+  document.getElementById('labelTheme').textContent = t('labelTheme');
+  document.getElementById('descTheme').textContent = t('descTheme');
+  document.getElementById('labelThemeSlot').textContent = t('labelThemeSlot');
+  document.getElementById('descThemeSlot').textContent = t('descThemeSlot');
+  document.getElementById('saveThemeSlotBtn').textContent = t('btnSaveThemeSlot');
+  const themeOptions = document.querySelectorAll('#themeSelect option');
+  themeOptions[0].textContent = t('themePurple');
+  themeOptions[1].textContent = t('themeOcean');
+  themeOptions[2].textContent = t('themeSunset');
+  themeOptions[3].textContent = t('themeForest');
+  themeOptions[4].textContent = t('themeCustom');
+  document.getElementById('labelAccentColor').textContent = t('labelAccentColor');
+  document.getElementById('labelParticleColor').textContent = t('labelParticleColor');
+  document.getElementById('labelBgPrimary').textContent = t('labelBgPrimary');
+  document.getElementById('labelBgSecondary').textContent = t('labelBgSecondary');
+  document.getElementById('labelBgTertiary').textContent = t('labelBgTertiary');
+  document.getElementById('labelTextPrimary').textContent = t('labelTextPrimary');
+  document.getElementById('labelTextSecondary').textContent = t('labelTextSecondary');
+  
   document.getElementById('sectionAudio').textContent = t('sectionAudio');
   document.getElementById('labelCrossfade').textContent = t('labelCrossfade');
   document.getElementById('descCrossfade').textContent = t('descCrossfade');
@@ -1600,7 +1874,16 @@ function updateLanguage() {
   document.getElementById('labelCover').textContent = t('labelCover');
   document.getElementById('labelFiles').textContent = t('labelFiles');
   document.getElementById('btnCreate').textContent = t('btnCreate');
+  const openPlaylistButton = document.getElementById('openPlaylistModal');
+  if (openPlaylistButton) openPlaylistButton.textContent = t('btnNewPlaylist');
   document.getElementById('titleMyPlaylists').textContent = t('titleMyPlaylists');
+  document.getElementById('confirmModalTitle').textContent = t('confirmTitle');
+  document.getElementById('confirmCancelBtn').textContent = t('btnCancel');
+  document.getElementById('confirmConfirmBtn').textContent = t('btnConfirm');
+  document.getElementById('renameModalTitle').textContent = t('renameTitle');
+  document.getElementById('renameModalLabel').textContent = t('promptRename');
+  document.getElementById('renameModalInput').placeholder = t('promptRename');
+  document.getElementById('renameConfirmBtn').textContent = t('btnRename');
   document.getElementById('editListBtn').textContent = t('btnEdit');
   document.getElementById('deleteListBtn').textContent = t('btnDelete');
   document.getElementById('labelNewName').textContent = t('labelNewName');
@@ -1625,6 +1908,9 @@ function loadSettings() {
   const saved = localStorage.getItem('ybmp_settings');
   if (saved) {
     settings = { ...settings, ...JSON.parse(saved) };
+    if (!settings.colors && settings.customColors) {
+      settings.colors = { ...settings.customColors };
+    }
   }
   applySettings();
   updateLanguage();
@@ -1654,8 +1940,18 @@ function applySettings() {
   document.getElementById('particlesToggle').classList.toggle('active', settings.particles);
   document.getElementById('crossfadeToggle').classList.toggle('active', settings.crossfade);
   document.getElementById('normalizeToggle').classList.toggle('active', settings.normalize);
+  document.getElementById('themeSelect').value = settings.theme || 'purple';
   document.getElementById('visualizerType').value = settings.visualizerType;
   document.getElementById('languageSelect').value = settings.language;
+
+  if (particleCountSlider) particleCountSlider.value = settings.particleCount;
+  if (particleCountValue) particleCountValue.textContent = settings.particleCount;
+  if (particleSizeSlider) particleSizeSlider.value = settings.particleSize;
+  if (particleSizeValue) particleSizeValue.textContent = settings.particleSize;
+  
+  updateColorPickers();
+  
+  applyThemeColors();
   
   document.getElementById('key-playpause').value = settings.keymap.playpause === ' ' ? t('keySpace') : settings.keymap.playpause;
   document.getElementById('key-prev').value = settings.keymap.prev;
@@ -1722,18 +2018,299 @@ settingsModal.addEventListener('click', (e) => {
   }
 });
 
+const playlistModal = document.getElementById('playlistModal');
+const openPlaylistModal = document.getElementById('openPlaylistModal');
+const closePlaylistModal = document.getElementById('closePlaylistModal');
+
+openPlaylistModal.addEventListener('click', () => {
+  playlistModal.classList.add('show');
+});
+
+closePlaylistModal.addEventListener('click', () => {
+  playlistModal.classList.remove('show');
+});
+
+playlistModal.addEventListener('click', (e) => {
+  if (e.target === playlistModal) {
+    playlistModal.classList.remove('show');
+  }
+});
+
 document.getElementById('languageSelect').addEventListener('change', function() {
   settings.language = this.value;
   saveSettings();
   updateLanguage();
 });
 
-document.getElementById('darkModeToggle').addEventListener('click', function() {
-  settings.darkMode = !settings.darkMode;
-  this.classList.toggle('active', settings.darkMode);
-  document.body.classList.toggle('light-mode', !settings.darkMode);
+const confirmModal = document.getElementById('confirmModal');
+const confirmModalTitle = document.getElementById('confirmModalTitle');
+const confirmModalMessage = document.getElementById('confirmModalMessage');
+const confirmConfirmBtn = document.getElementById('confirmConfirmBtn');
+const confirmCancelBtn = document.getElementById('confirmCancelBtn');
+const closeConfirmModal = document.getElementById('closeConfirmModal');
+
+const renameModal = document.getElementById('renameModal');
+const renameModalTitle = document.getElementById('renameModalTitle');
+const renameModalLabel = document.getElementById('renameModalLabel');
+const renameModalInput = document.getElementById('renameModalInput');
+const renameConfirmBtn = document.getElementById('renameConfirmBtn');
+const renameCancelBtn = document.getElementById('renameCancelBtn');
+const closeRenameModal = document.getElementById('closeRenameModal');
+
+function showConfirm(message) {
+  return new Promise(resolve => {
+    confirmModalMessage.textContent = message;
+    confirmModal.classList.add('show');
+
+    const cleanup = () => {
+      confirmConfirmBtn.removeEventListener('click', onConfirm);
+      confirmCancelBtn.removeEventListener('click', onCancel);
+      closeConfirmModal.removeEventListener('click', onCancel);
+      confirmModal.removeEventListener('click', onOutsideClick);
+    };
+
+    const close = (result) => {
+      confirmModal.classList.remove('show');
+      cleanup();
+      resolve(result);
+    };
+
+    const onConfirm = () => close(true);
+    const onCancel = () => close(false);
+    const onOutsideClick = (event) => {
+      if (event.target === confirmModal) close(false);
+    };
+
+    confirmConfirmBtn.addEventListener('click', onConfirm);
+    confirmCancelBtn.addEventListener('click', onCancel);
+    closeConfirmModal.addEventListener('click', onCancel);
+    confirmModal.addEventListener('click', onOutsideClick);
+  });
+}
+
+function showRenamePrompt(initialName = '') {
+  return new Promise(resolve => {
+    renameModalInput.value = initialName;
+    renameModalTitle.textContent = t('renameTitle');
+    renameModalLabel.textContent = t('promptRename');
+    renameModalInput.placeholder = t('promptRename');
+    renameModal.classList.add('show');
+    renameModalInput.focus();
+
+    const cleanup = () => {
+      renameConfirmBtn.removeEventListener('click', onConfirm);
+      renameCancelBtn.removeEventListener('click', onCancel);
+      closeRenameModal.removeEventListener('click', onCancel);
+      renameModal.removeEventListener('click', onOutsideClick);
+      renameModalInput.removeEventListener('keydown', onKeyDown);
+    };
+
+    const close = (value) => {
+      renameModal.classList.remove('show');
+      cleanup();
+      resolve(value);
+    };
+
+    const onConfirm = () => close(renameModalInput.value);
+    const onCancel = () => close(null);
+    const onOutsideClick = (event) => {
+      if (event.target === renameModal) close(null);
+    };
+    const onKeyDown = (event) => {
+      if (event.key === 'Enter') onConfirm();
+      if (event.key === 'Escape') onCancel();
+    };
+
+    renameConfirmBtn.addEventListener('click', onConfirm);
+    renameCancelBtn.addEventListener('click', onCancel);
+    closeRenameModal.addEventListener('click', onCancel);
+    renameModal.addEventListener('click', onOutsideClick);
+    renameModalInput.addEventListener('keydown', onKeyDown);
+  });
+}
+
+function setThemePreset(theme) {
+  if (themePresets[theme]) {
+    settings.colors = { ...themePresets[theme] };
+  }
+}
+
+function applyThemeColors() {
+  const colors = settings.theme && themePresets[settings.theme]
+    ? themePresets[settings.theme]
+    : settings.colors;
+
+  if (!colors) return;
+
+  settings.colors = { ...colors };
+  const root = document.documentElement;
+  root.style.setProperty('--accent', colors.accent);
+  root.style.setProperty('--accent-end', colors.accent);
+  root.style.setProperty('--accent-hover', colors.accent);
+  root.style.setProperty('--accent-light', hexToRgba(colors.accent, 0.1));
+  root.style.setProperty('--accent-shadow', hexToRgba(colors.accent, 0.4));
+  root.style.setProperty('--accent-overlay', hexToRgba(colors.accent, 0.15));
+  root.style.setProperty('--particle-color', colors.particleColor || colors.accent);
+  root.style.setProperty('--bg-primary', colors.bgPrimary);
+  root.style.setProperty('--bg-secondary', colors.bgSecondary);
+  root.style.setProperty('--bg-tertiary', colors.bgTertiary);
+  root.style.setProperty('--text-primary', colors.textPrimary);
+  root.style.setProperty('--text-secondary', colors.textSecondary);
+}
+
+async function loadThemeSlots() {
+  if (!db) return;
+  themeSlots = await idbGetAll('themes');
+  renderThemeSlotOptions();
+}
+
+function renderThemeSlotOptions() {
+  const select = document.getElementById('themeSlotSelect');
+  if (!select) return;
+  select.innerHTML = '';
+  for (let i = 1; i <= MAX_THEME_SLOTS; i++) {
+    const slotId = `slot${i}`;
+    const slot = themeSlots.find(s => s.id === slotId);
+    const option = document.createElement('option');
+    option.value = slotId;
+    option.textContent = slot ? slot.name || `${t('slotCustom')} ${i}` : `${t('slotCustom')} ${i}`;
+    select.appendChild(option);
+  }
+  if (settings.themeSlot) {
+    select.value = settings.themeSlot;
+  }
+}
+
+async function loadThemeSlot(slotId) {
+  if (!slotId) return;
+  const slot = themeSlots.find(s => s.id === slotId);
+  if (!slot || !slot.colors) return;
+  settings.colors = { ...slot.colors };
+  settings.theme = 'custom';
+  settings.themeSlot = slotId;
+  applyThemeColors();
+  if (themeSelect) themeSelect.value = 'custom';
+  if (themeSlotSelect) themeSlotSelect.value = slotId;
+  updateColorPickers();
+  saveSettings();
+}
+
+async function saveThemeSlot() {
+  const slotId = document.getElementById('themeSlotSelect').value;
+  if (!slotId) return;
+  const slotIndex = parseInt(slotId.replace('slot', ''), 10);
+  const theme = {
+    id: slotId,
+    name: `${t('slotCustom')} ${slotIndex}`,
+    colors: { ...settings.colors }
+  };
+  await idbPut('themes', theme);
+  await loadThemeSlots();
+  settings.themeSlot = slotId;
+  settings.theme = 'custom';
+  saveSettings();
+}
+
+function hexToRgba(hex, alpha) {
+  const cleanHex = hex.replace('#', '');
+  const bigint = parseInt(cleanHex, 16);
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+const themeSelect = document.getElementById('themeSelect');
+const themeSlotSelect = document.getElementById('themeSlotSelect');
+const saveThemeSlotBtn = document.getElementById('saveThemeSlotBtn');
+const particleCountSlider = document.getElementById('particleCountSlider');
+const particleCountValue = document.getElementById('particleCountValue');
+const particleSizeSlider = document.getElementById('particleSizeSlider');
+const particleSizeValue = document.getElementById('particleSizeValue');
+const accentColorPicker = document.getElementById('accentColorPicker');
+const particleColorPicker = document.getElementById('particleColorPicker');
+const bgPrimaryPicker = document.getElementById('bgPrimaryPicker');
+const bgSecondaryPicker = document.getElementById('bgSecondaryPicker');
+const bgTertiaryPicker = document.getElementById('bgTertiaryPicker');
+const textPrimaryPicker = document.getElementById('textPrimaryPicker');
+const textSecondaryPicker = document.getElementById('textSecondaryPicker');
+
+themeSelect.addEventListener('change', function() {
+  settings.theme = this.value;
+  settings.themeSlot = null;
+  if (this.value !== 'custom') {
+    setThemePreset(this.value);
+  }
+  applyThemeColors();
+  updateColorPickers();
   saveSettings();
 });
+
+function updateColorPickers() {
+  const palette = settings.colors || settings.customColors || themePresets[settings.theme] || {};
+  accentColorPicker.value = palette.accent || '#6366f1';
+  particleColorPicker.value = palette.particleColor || palette.accent || '#6366f1';
+  bgPrimaryPicker.value = palette.bgPrimary || '#0a0e27';
+  bgSecondaryPicker.value = palette.bgSecondary || '#151a35';
+  bgTertiaryPicker.value = palette.bgTertiary || '#1e2541';
+  textPrimaryPicker.value = palette.textPrimary || '#f8fafc';
+  textSecondaryPicker.value = palette.textSecondary || '#94a3b8';
+}
+
+[accentColorPicker, particleColorPicker, bgPrimaryPicker, bgSecondaryPicker, bgTertiaryPicker, textPrimaryPicker, textSecondaryPicker].forEach(picker => {
+  picker.addEventListener('input', function() {
+    settings.theme = 'custom';
+    settings.colors = {
+      ...settings.colors,
+      accent: accentColorPicker.value,
+      particleColor: particleColorPicker.value,
+      bgPrimary: bgPrimaryPicker.value,
+      bgSecondary: bgSecondaryPicker.value,
+      bgTertiary: bgTertiaryPicker.value,
+      textPrimary: textPrimaryPicker.value,
+      textSecondary: textSecondaryPicker.value
+    };
+    settings.theme = 'custom';
+    settings.themeSlot = null;
+    themeSelect.value = 'custom';
+    applyThemeColors();
+    saveSettings();
+  });
+});
+
+if (themeSlotSelect) {
+  themeSlotSelect.addEventListener('change', async function() {
+    await loadThemeSlot(this.value);
+  });
+}
+
+if (saveThemeSlotBtn) {
+  saveThemeSlotBtn.addEventListener('click', function() {
+    saveThemeSlot();
+  });
+}
+
+if (particleCountSlider && particleCountValue) {
+  particleCountSlider.addEventListener('input', function() {
+    settings.particleCount = Number(this.value);
+    particleCountValue.textContent = this.value;
+    if (settings.particles) {
+      createParticles();
+    }
+    saveSettings();
+  });
+}
+
+if (particleSizeSlider && particleSizeValue) {
+  particleSizeSlider.addEventListener('input', function() {
+    settings.particleSize = Number(this.value);
+    particleSizeValue.textContent = this.value;
+    if (settings.particles) {
+      createParticles();
+    }
+    saveSettings();
+  });
+}
 
 document.getElementById('particlesToggle').addEventListener('click', function() {
   settings.particles = !settings.particles;
@@ -1834,8 +2411,9 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-document.getElementById('resetSettings').addEventListener('click', () => {
-  if (!confirm(t('confirmResetSettings'))) return;
+document.getElementById('resetSettings').addEventListener('click', async () => {
+  const confirmed = await showConfirm(t('confirmResetSettings'));
+  if (!confirmed) return;
   settings = {
     language: 'en',
     darkMode: true,
@@ -1866,11 +2444,13 @@ document.getElementById('resetSettings').addEventListener('click', () => {
 function createParticles() {
   const particlesEl = document.getElementById('particles');
   particlesEl.innerHTML = '';
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < settings.particleCount; i++) {
     const particle = document.createElement('div');
     particle.className = 'particle';
     particle.style.left = Math.random() * 100 + '%';
     particle.style.top = Math.random() * 100 + '%';
+    particle.style.width = settings.particleSize + 'px';
+    particle.style.height = settings.particleSize + 'px';
     particle.style.animationDelay = Math.random() * 10 + 's';
     particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
     particlesEl.appendChild(particle);
@@ -1896,6 +2476,7 @@ function openDB(){
       const d = e.target.result;
       if (!d.objectStoreNames.contains('files')) d.createObjectStore('files',{keyPath:'id'});
       if (!d.objectStoreNames.contains('playlists')) d.createObjectStore('playlists',{keyPath:'id'});
+      if (!d.objectStoreNames.contains('themes')) d.createObjectStore('themes',{keyPath:'id'});
     };
     rq.onsuccess = e => { db = e.target.result; res(db); };
     rq.onerror = e => rej(e);
@@ -2027,7 +2608,27 @@ searchInput.addEventListener('input', (e) => {
   playlists = await idbGetAll('playlists'); 
   renderLists(); 
   loadSettings();
+  await loadThemeSlots();
+  initScrollReveal();
 })();
+
+function initScrollReveal() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, {
+    threshold: [0, 0.15],
+    rootMargin: '0px 0px -10% 0px'
+  });
+
+  const revealElements = document.querySelectorAll('.reveal-section');
+  revealElements.forEach(el => observer.observe(el));
+}
 
 function renderLists(){
   listsContainer.innerHTML='';
@@ -2115,6 +2716,10 @@ createBtn.addEventListener('click', async () => {
   newCover.value = '';
   newFiles.value = '';
   
+  if (playlistModal) {
+    playlistModal.classList.remove('show');
+  }
+  
   currentPlaylist = pl;
   currentIndex = 0;
   renderLists();
@@ -2166,7 +2771,7 @@ function renderPlaylist() {
     
     const icon = document.createElement('div');
     icon.className = 'track-icon';
-    icon.textContent = f.type && f.type.startsWith('video') ? '🎞️' : '🎵';
+    icon.textContent = '🎵';
     
     const details = document.createElement('div');
     details.className = 'track-details';
@@ -2197,7 +2802,7 @@ function renderPlaylist() {
     renameBtn.title = t('btnEdit');
     renameBtn.onclick = async (e) => {
       e.stopPropagation();
-      const nv = prompt(t('promptRename'), f.name);
+      const nv = await showRenamePrompt(f.name);
       if (nv === null) return;
       currentPlaylist.files[i].name = nv;
       await idbPut('playlists', currentPlaylist);
@@ -2210,7 +2815,8 @@ function renderPlaylist() {
     removeBtn.title = t('btnDelete');
     removeBtn.onclick = async (e) => {
       e.stopPropagation();
-      if (!confirm(t('confirmDeleteTrack'))) return;
+      const confirmed = await showConfirm(t('confirmDeleteTrack'));
+      if (!confirmed) return;
       currentPlaylist.files.splice(i, 1);
       await idbPut('playlists', currentPlaylist);
       
@@ -2555,7 +3161,8 @@ saveEditBtn.addEventListener('click', async () => {
 
 deleteListBtn.addEventListener('click', async () => {
   if (!currentPlaylist) return alert(t('alertSelectFirst'));
-  if (!confirm(t('confirmDeletePlaylist', { name: currentPlaylist.name }))) return;
+  const confirmed = await showConfirm(t('confirmDeletePlaylist', { name: currentPlaylist.name }));
+  if (!confirmed) return;
   
   await idbDel('playlists', currentPlaylist.id);
   
@@ -2574,7 +3181,8 @@ deleteListBtn.addEventListener('click', async () => {
 });
 
 cleanupBtn.addEventListener('click', async () => {
-  if (!confirm(t('confirmCleanup'))) return;
+  const confirmed = await showConfirm(t('confirmCleanup'));
+  if (!confirmed) return;
   await cleanupFiles();
   alert(t('alertCleanupComplete'));
 });
