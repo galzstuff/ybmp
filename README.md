@@ -5,9 +5,9 @@ it features a hell lotta stuff &amp; more to come, so give it a shot!
 no servers, no accounts, just you &amp; whats yours, forever.
 to start, head over to galzstuff.github.io/ybmp OR download the index.html file from the files here or in releases to have full, local access.
 
-<img width="1287" height="610" alt="image where the user, using the spanish locale, is listening to BIRDBRAIN by Jamie Paige feat. OK Glass & Kasane Teto, so the UI can be clearly seen (this UI as of v0.4)" src="https://github.com/user-attachments/assets/bb501086-4da8-44e3-a990-c3a0d75b8ebe" />
+<img width="1287" height="610" alt="demo image 1, based on v0.4" src="https://github.com/user-attachments/assets/bb501086-4da8-44e3-a990-c3a0d75b8ebe" />
 
-<img width="557" height="504" alt="image where the settings menu is shown in the english locale, featuring some of the adjustable settings as of v0.4" src="https://github.com/user-attachments/assets/fdad6f78-1021-43a1-8034-a507824f4d42" />
+<img width="557" height="504" alt="demo image 2, based on v0.4" src="https://github.com/user-attachments/assets/fdad6f78-1021-43a1-8034-a507824f4d42" />
 
 
 
@@ -16,11 +16,11 @@ to start, head over to galzstuff.github.io/ybmp OR download the index.html file 
 - no tracking, accounts or any of that, we don't do that here >:^[
 - languages (spanish & english, probably more coming soon)
 - clean UI :D
-- volume and speed adjusters
+- themes
 - more coming in the future!
 
 ## about beta access:
-download betas/unstable versions from the releases page under the tag beta-github or visit galzstuff.github.io/ybmp-beta to access the latest beta w/out losing stuff from the stable version
+download betas/unstable versions from the releases page under the beta tags or visit galzstuff.github.io/ybmp-beta to access the latest beta w/out losing stuff from the stable version (though it may be updated less than the standard version here)
 
 ## oh yea, & please note:
 i won't maintain this forever due to various reasons, at least, publicly on github, this could be considered as a sort of experiment. however, you may modify the code at your liking (fork the code or suggest me stuff to add) (thanks, *The Unlicence*!) and idk just do whatever you wish with it. *your stuff, your rules.*
