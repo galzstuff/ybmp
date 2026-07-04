@@ -13,6 +13,7 @@ to start, head over to galzstuff.github.io/ybmp OR download the index.html file 
 
 # features:
 - works fully offline!! it uses indexeddb, a **definitely** better version of localstorage that allows for well... storaging!
+- it is bundled all in a single file (at least, that's for the main portable and for now general experience, separated version should come at some moment), so it should be fully compatible with file URLs (for example file://, windows directories or externalfile: being tested and confirmed ones)
 - no tracking, accounts or any of that, we don't do that here >:^[
 - languages (spanish & english, probably more coming soon)
 - clean UI :D
