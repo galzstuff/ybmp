@@ -18,7 +18,7 @@ to start, head over to galzstuff.github.io/ybmp OR download the index.html file 
 - languages (spanish & english, probably more coming soon)
 - clean UI :D
 - themes
-- more coming in the future!
+- more coming in the future! (*discord compatibility via PREMiD is in the works!*)
 
 ## about beta access:
 ~~download betas/unstable versions from the releases page under the beta tags or visit galzstuff.github.io/ybmp-beta to access the latest beta w/out losing stuff from the stable version (though it may be updated less than the standard version here)~~ head over to https://github.com/galzstuff/ybmp-beta to download a beta html (or whatever other thing i am experimenting on thats compatible with the player) or https://galzstuff.github.io/ybmp-beta (even tho all contents may and/or will be less stable as on here - your choice, tho'!)
@@ -27,6 +27,6 @@ to start, head over to galzstuff.github.io/ybmp OR download the index.html file 
 i won't maintain this forever due to various reasons, at least, publicly on github, this could be considered as a sort of experiment. however, you may modify the code at your liking (fork the code or suggest me stuff to add) (thanks, *The Unlicence*!) and idk just do whatever you wish with it. *once it is considered your stuff, your rules shall be applied.*
 
 ### like this?
-visit galzstuff.github.io to know more about other proyects made by me!
+visit galzstuff.github.io to know more about other proyects made by (and in general stuff about) me!
 
 cover art credits on demo image 1: https://pinterest.com/Azazelda_dream/
