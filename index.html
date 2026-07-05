@@ -3589,6 +3589,28 @@ window.addEventListener('beforeunload', () => {
   if (currentCoverUrl) try { URL.revokeObjectURL(currentCoverUrl); } catch (e) {}
   for (const k in currentFileUrls) try { URL.revokeObjectURL(currentFileUrls[k]); } catch (e) {}
 });
+
+// --- Puente para PreMiD (sincroniza el estado actual en localStorage) ---
+function syncPreMiDState() {
+  try {
+    const title = (currentIndex >= 0 && currentPlaylist?.files?.[currentIndex])
+      ? currentPlaylist.files[currentIndex].name
+      : '';
+    localStorage.setItem('ybmp_current_track', title);
+    localStorage.setItem('ybmp_current_playlist', currentPlaylist?.name || '');
+    localStorage.setItem('ybmp_is_playing', String(isPlaying && !audio.paused));
+    localStorage.setItem('ybmp_current_time', String(Math.floor(audio.currentTime || 0)));
+    localStorage.setItem('ybmp_duration', String(Math.floor(audio.duration || 0)));
+  } catch (e) {
+    // localStorage puede fallar en modo privado; lo ignoramos silenciosamente
+  }
+}
+
+audio.addEventListener('timeupdate', syncPreMiDState);
+audio.addEventListener('play', syncPreMiDState);
+audio.addEventListener('pause', syncPreMiDState);
+audio.addEventListener('ended', syncPreMiDState);
+audio.addEventListener('loadedmetadata', syncPreMiDState);
 </script>
 </body>
 </html>
