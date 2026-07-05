@@ -25,15 +25,7 @@
       --shadow: rgba(0, 0, 0, 0.5);
     }
 
-    body.light-mode {
-      --bg-primary: #f1f5f9;
-      --bg-secondary: #ffffff;
-      --bg-tertiary: #e2e8f0;
-      --text-primary: #0f172a;
-      --text-secondary: #475569;
-      --border: rgba(15, 23, 42, 0.1);
-      --shadow: rgba(0, 0, 0, 0.1);
-    }
+
     
     * {
       box-sizing: border-box;
@@ -96,6 +88,27 @@
       margin-bottom: 32px;
       animation: fadeInDown 0.6s ease-out;
       position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .header-top {
+      position: relative;
+      width: 100%;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+
+    .header-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
     }
     
     .header h1 {
@@ -116,8 +129,9 @@
     
     .settings-btn {
       position: absolute;
-      top: 0;
+      top: 50%;
       right: 0;
+      transform: translateY(-50%);
       width: 48px;
       height: 48px;
       border-radius: 50%;
@@ -1143,10 +1157,14 @@
   <div id="particles"></div>
 
   <div class="container">
-    <div class="header reveal-section">
-      <button class="settings-btn" id="settingsBtn">⚙️</button>
-      <h1 id="appTitle">gal's YBMP</h1>
-      <p id="appSubtitle">(stands for Your Basic Music Player!)</p>
+    <div class="header">
+      <div class="header-top">
+        <button class="settings-btn" id="settingsBtn">⚙️</button>
+        <div class="header-content">
+          <h1 id="appTitle">galz' YBMP</h1>
+          <p id="appSubtitle">(stands for Your Basic Music Player!)</p>
+        </div>
+      </div>
     </div>
 
     <div class="modal-overlay" id="settingsModal">
@@ -1174,14 +1192,6 @@
         <div class="settings-section">
           <h3 class="settings-section-title" id="sectionAppearance">🎨 appearance</h3>
           
-          <div class="setting-item">
-            <div>
-              <div class="setting-label" id="labelDarkMode">dark mode</div>
-              <div class="setting-description" id="descDarkMode">toggle between light and dark mode</div>
-            </div>
-            <div class="toggle-switch" id="darkModeToggle"></div>
-          </div>
-
           <div class="setting-item">
             <div>
               <div class="setting-label" id="labelParticles">particle effects</div>
@@ -1227,6 +1237,99 @@
             </div>
           </div>
 
+          <div id="themeCustomizationControls" style="display:none;">
+            <div class="setting-item">
+              <div>
+                <div class="setting-label" id="labelThemeMode">customization mode</div>
+                <div class="setting-description" id="descThemeMode">use simple color pickers or full CSS</div>
+              </div>
+              <select class="select" id="themeModeSelect">
+                <option value="simple">simple</option>
+                <option value="advanced">advanced</option>
+              </select>
+            </div>
+
+            <div id="simpleThemeControls">
+              <div class="setting-item">
+                <div>
+                  <div class="setting-label" id="labelAccentColor">accent color</div>
+                </div>
+                <input type="color" class="input" id="accentColorPicker" value="#6366f1">
+              </div>
+
+              <div class="setting-item">
+                <div>
+                  <div class="setting-label" id="labelParticleColor">particle color</div>
+                </div>
+                <input type="color" class="input" id="particleColorPicker" value="#6366f1">
+              </div>
+
+              <div class="setting-item">
+                <div>
+                  <div class="setting-label" id="labelBgPrimary">background primary</div>
+                </div>
+                <input type="color" class="input" id="bgPrimaryPicker" value="#0a0e27">
+              </div>
+
+              <div class="setting-item">
+                <div>
+                  <div class="setting-label" id="labelBgSecondary">background secondary</div>
+                </div>
+                <input type="color" class="input" id="bgSecondaryPicker" value="#151a35">
+              </div>
+
+              <div class="setting-item">
+                <div>
+                  <div class="setting-label" id="labelBgTertiary">background tertiary</div>
+                </div>
+                <input type="color" class="input" id="bgTertiaryPicker" value="#1e2541">
+              </div>
+
+              <div class="setting-item">
+                <div>
+                  <div class="setting-label" id="labelTextPrimary">text primary</div>
+                </div>
+                <input type="color" class="input" id="textPrimaryPicker" value="#f8fafc">
+              </div>
+
+              <div class="setting-item">
+                <div>
+                  <div class="setting-label" id="labelTextSecondary">text secondary</div>
+                </div>
+                <input type="color" class="input" id="textSecondaryPicker" value="#94a3b8">
+              </div>
+            </div>
+
+            <div id="advancedThemeControls" style="display:none;">
+              <div class="setting-item" style="display:block; align-items:stretch; flex-direction:column;">
+                <div>
+                  <div class="setting-label" id="labelAdvancedCss">advanced CSS</div>
+                  <div class="setting-description" id="descAdvancedCss">edit the full CSS for this theme slot</div>
+                </div>
+                <textarea id="advancedCssEditor" class="input" rows="8" style="width:100%; min-height:140px; font-family:monospace; margin-top:8px;"></textarea>
+                <div style="display:flex; justify-content:flex-end; margin-top:8px;">
+                  <button class="btn btn-secondary btn-small" id="applyAdvancedThemeBtn">apply css</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="setting-item">
+            <div>
+              <div class="setting-label" id="labelHideTitle">hide title</div>
+              <div class="setting-description" id="descHideTitle">hide the header title</div>
+            </div>
+            <div class="toggle-switch" id="hideTitleToggle"></div>
+          </div>
+
+          <div class="setting-item">
+            <div>
+              <div class="setting-label" id="labelHideSubtitle">hide subtitle</div>
+              <div class="setting-description" id="descHideSubtitle">hide the header subtitle</div>
+            </div>
+            <div class="toggle-switch" id="hideSubtitleToggle"></div>
+          </div>
+
           <div class="setting-item">
             <div>
               <div class="setting-label" id="labelParticleCount">particle amount</div>
@@ -1249,54 +1352,6 @@
             </div>
           </div>
 
-          <div class="setting-item">
-            <div>
-              <div class="setting-label" id="labelAccentColor">accent color</div>
-            </div>
-            <input type="color" class="input" id="accentColorPicker" value="#6366f1">
-          </div>
-
-          <div class="setting-item">
-            <div>
-              <div class="setting-label" id="labelParticleColor">particle color</div>
-            </div>
-            <input type="color" class="input" id="particleColorPicker" value="#6366f1">
-          </div>
-
-          <div class="setting-item">
-            <div>
-              <div class="setting-label" id="labelBgPrimary">background primary</div>
-            </div>
-            <input type="color" class="input" id="bgPrimaryPicker" value="#0a0e27">
-          </div>
-
-          <div class="setting-item">
-            <div>
-              <div class="setting-label" id="labelBgSecondary">background secondary</div>
-            </div>
-            <input type="color" class="input" id="bgSecondaryPicker" value="#151a35">
-          </div>
-
-          <div class="setting-item">
-            <div>
-              <div class="setting-label" id="labelBgTertiary">background tertiary</div>
-            </div>
-            <input type="color" class="input" id="bgTertiaryPicker" value="#1e2541">
-          </div>
-
-          <div class="setting-item">
-            <div>
-              <div class="setting-label" id="labelTextPrimary">text primary</div>
-            </div>
-            <input type="color" class="input" id="textPrimaryPicker" value="#f8fafc">
-          </div>
-
-          <div class="setting-item">
-            <div>
-              <div class="setting-label" id="labelTextSecondary">text secondary</div>
-            </div>
-            <input type="color" class="input" id="textSecondaryPicker" value="#94a3b8">
-          </div>
         </div>
 
         <div class="settings-section">
@@ -1310,13 +1365,7 @@
             <div class="toggle-switch" id="crossfadeToggle"></div>
           </div>
 
-          <div class="setting-item">
-            <div>
-              <div class="setting-label" id="labelNormalize">volume normalization</div>
-              <div class="setting-description" id="descNormalize">equalize volume across tracks</div>
-            </div>
-            <div class="toggle-switch" id="normalizeToggle"></div>
-          </div>
+
         </div>
 
         <div class="settings-section">
@@ -1465,6 +1514,7 @@
             <div class="controls">
               <button id="shuffleBtn" class="control-btn" title="shuffle">🔀</button>
               <button id="prevBtn" class="control-btn" title="previous">⏮️</button>
+              <button id="stopBtn" class="control-btn" title="stop">⏹️</button>
               <button id="playBtn" class="control-btn play" title="play/Pause">▶</button>
               <button id="nextBtn" class="control-btn" title="next">⏭️</button>
               <button id="repeatOneBtn" class="control-btn" title="repeat one">🔂</button>
@@ -1522,22 +1572,21 @@
     </div>
 
     <div class="footer reveal-section" id="footer">
-      made with love by gal ;)
+      made with love by galz ;)
     </div>
   </div>
 
 <script>
 const translations = {
   en: {
-    appTitle: "gal's YBMP",
+    appTitle: "galz' YBMP",
     appSubtitle: "(stands for Your Basic Music Player!)",
     modalTitle: "⚙️ settings",
     sectionGeneral: "🌐 general",
     labelLanguage: "language",
     descLanguage: "choose interface language",
     sectionAppearance: "🎨 appearance",
-    labelDarkMode: "dark mode",
-    descDarkMode: "toggle between light and dark mode",
+
     labelParticles: "particle effects",
     descParticles: "floating particles in the background",
     labelVisualizer: "visualizer type",
@@ -1552,11 +1601,22 @@ const translations = {
     themeSunset: "sunset",
     themeForest: "forest",
     themeCustom: "custom",
+    labelThemeMode: "customization mode",
+    descThemeMode: "use simple color pickers or full CSS",
+    themeModeSimple: "simple",
+    themeModeAdvanced: "advanced",
+    labelAdvancedCss: "advanced CSS",
+    descAdvancedCss: "edit the full CSS for this theme slot",
+    btnApplyCss: "apply css",
     labelAccentColor: "accent color",
     labelParticleColor: "particle color",
     labelThemeSlot: "theme slot",
     descThemeSlot: "load or save custom theme presets",
     btnSaveThemeSlot: "save slot",
+    labelHideTitle: "hide title",
+    descHideTitle: "hide the header title",
+    labelHideSubtitle: "hide subtitle",
+    descHideSubtitle: "hide the header subtitle",
     slotCustom: "custom slot",
     labelParticleCount: "particle amount",
     descParticleCount: "choose how many particles appear",
@@ -1570,8 +1630,6 @@ const translations = {
     sectionAudio: "🔊 audio",
     labelCrossfade: "crossfade",
     descCrossfade: "smooth transition between songs (3s)",
-    labelNormalize: "volume normalization",
-    descNormalize: "equalize volume across tracks",
     sectionKeyboard: "⌨️ keyboard shortcuts",
     labelKeyPlayPause: "play / pause",
     labelKeyPrev: "previous song",
@@ -1606,7 +1664,7 @@ const translations = {
     selectPlaylist: "select a playlist",
     selectTrack: "select a track",
     tracks: "tracks",
-    footer: "made with love by gal ;)",
+    footer: "made with love by galz ;)",
     alertNoName: "please enter a playlist name",
     alertNoCover: "please select a cover image",
     alertNoFiles: "please select at least one file",
@@ -1621,18 +1679,18 @@ const translations = {
     alertCleanupComplete: "cleanup completed",
     promptRename: "new name",
     keySpace: "space",
-    pressKey: "press a key..."
+    pressKey: "press a key...",
+    stop: "stop"
   },
   es: {
-    appTitle: "YBMP, por gal",
+    appTitle: "YBMP, por galz",
     appSubtitle: "(¡significa Your Basic Music Player, o Tu Reproductor de Música Básico en español!)",
     modalTitle: "⚙️ configuración",
     sectionGeneral: "🌐 general",
     labelLanguage: "idioma",
     descLanguage: "elegir idioma de la interfaz",
     sectionAppearance: "🎨 apariencia",
-    labelDarkMode: "modo oscuro",
-    descDarkMode: "alternar entre modo claro y oscuro",
+
     labelParticles: "efectos de partículas",
     descParticles: "partículas flotantes en el fondo",
     labelVisualizer: "tipo de visualizador",
@@ -1647,11 +1705,22 @@ const translations = {
     themeSunset: "atardecer",
     themeForest: "bosque",
     themeCustom: "personalizado",
+    labelThemeMode: "modo de personalización",
+    descThemeMode: "usa selectores simples o CSS completo",
+    themeModeSimple: "simple",
+    themeModeAdvanced: "avanzado",
+    labelAdvancedCss: "CSS avanzado",
+    descAdvancedCss: "edita el CSS completo de este slot",
+    btnApplyCss: "aplicar CSS",
     labelAccentColor: "color acento",
     labelParticleColor: "color de partículas",
     labelThemeSlot: "slot de tema",
     descThemeSlot: "carga o guarda temas personalizados",
     btnSaveThemeSlot: "guardar slot",
+    labelHideTitle: "ocultar título",
+    descHideTitle: "oculta el título de la cabecera",
+    labelHideSubtitle: "ocultar subtítulo",
+    descHideSubtitle: "oculta el subtítulo de la cabecera",
     slotCustom: "slot personalizado",
     labelParticleCount: "cantidad de partículas",
     descParticleCount: "elige cuántas partículas aparecen",
@@ -1665,8 +1734,6 @@ const translations = {
     sectionAudio: "🔊 audio",
     labelCrossfade: "fundido cruzado",
     descCrossfade: "transición suave entre canciones (3s)",
-    labelNormalize: "normalización de volumen",
-    descNormalize: "igualar volumen entre pistas",
     sectionKeyboard: "⌨️ atajos de teclado",
     labelKeyPlayPause: "play / pausa",
     labelKeyPrev: "canción anterior",
@@ -1701,7 +1768,7 @@ const translations = {
     selectPlaylist: "selecciona una lista",
     selectTrack: "selecciona una pista",
     tracks: "pistas",
-    footer: "creado, con amor, por gal ;)",
+    footer: "creado, con amor, por galz ;)",
     alertNoName: "pon un nombre a la lista",
     alertNoCover: "selecciona una imagen de portada",
     alertNoFiles: "selecciona al menos un archivo",
@@ -1716,7 +1783,8 @@ const translations = {
     alertCleanupComplete: "limpieza completada",
     promptRename: "nuevo nombre",
     keySpace: "espacio",
-    pressKey: "presiona una tecla..."
+    pressKey: "presiona una tecla...",
+    stop: "detener"
   }
 };
 
@@ -1737,16 +1805,19 @@ let audioContext = null;
 let analyser = null;
 let dataArray = null;
 let animationId = null;
+let customThemeStyleEl = null;
 
 let settings = {
   language: 'en',
-  darkMode: true,
   particles: false,
   visualizerType: 'bars',
   crossfade: false,
-  normalize: false,
   theme: 'purple',
   themeSlot: null,
+  themeMode: 'simple',
+  customCss: '',
+  hideTitle: false,
+  hideSubtitle: false,
   particleCount: 50,
   particleSize: 3,
   colors: {
@@ -1823,8 +1894,6 @@ function updateLanguage() {
   document.getElementById('labelLanguage').textContent = t('labelLanguage');
   document.getElementById('descLanguage').textContent = t('descLanguage');
   document.getElementById('sectionAppearance').textContent = t('sectionAppearance');
-  document.getElementById('labelDarkMode').textContent = t('labelDarkMode');
-  document.getElementById('descDarkMode').textContent = t('descDarkMode');
   document.getElementById('labelParticles').textContent = t('labelParticles');
   document.getElementById('descParticles').textContent = t('descParticles');
   document.getElementById('labelVisualizer').textContent = t('labelVisualizer');
@@ -1840,6 +1909,14 @@ function updateLanguage() {
   document.getElementById('labelThemeSlot').textContent = t('labelThemeSlot');
   document.getElementById('descThemeSlot').textContent = t('descThemeSlot');
   document.getElementById('saveThemeSlotBtn').textContent = t('btnSaveThemeSlot');
+  document.getElementById('labelThemeMode').textContent = t('labelThemeMode');
+  document.getElementById('descThemeMode').textContent = t('descThemeMode');
+  const themeModeOptions = document.querySelectorAll('#themeModeSelect option');
+  themeModeOptions[0].textContent = t('themeModeSimple');
+  themeModeOptions[1].textContent = t('themeModeAdvanced');
+  document.getElementById('labelAdvancedCss').textContent = t('labelAdvancedCss');
+  document.getElementById('descAdvancedCss').textContent = t('descAdvancedCss');
+  document.getElementById('applyAdvancedThemeBtn').textContent = t('btnApplyCss');
   const themeOptions = document.querySelectorAll('#themeSelect option');
   themeOptions[0].textContent = t('themePurple');
   themeOptions[1].textContent = t('themeOcean');
@@ -1857,8 +1934,6 @@ function updateLanguage() {
   document.getElementById('sectionAudio').textContent = t('sectionAudio');
   document.getElementById('labelCrossfade').textContent = t('labelCrossfade');
   document.getElementById('descCrossfade').textContent = t('descCrossfade');
-  document.getElementById('labelNormalize').textContent = t('labelNormalize');
-  document.getElementById('descNormalize').textContent = t('descNormalize');
   document.getElementById('sectionKeyboard').textContent = t('sectionKeyboard');
   document.getElementById('labelKeyPlayPause').textContent = t('labelKeyPlayPause');
   document.getElementById('labelKeyPrev').textContent = t('labelKeyPrev');
@@ -1894,6 +1969,7 @@ function updateLanguage() {
   document.getElementById('cleanupBtn').textContent = t('btnCleanup');
   document.getElementById('titleTracks').textContent = t('titleTracks');
   document.getElementById('searchInput').placeholder = t('placeholderSearch');
+  document.getElementById('stopBtn').title = t('stop');
   document.getElementById('footer').textContent = t('footer');
   
   if (!currentPlaylist) {
@@ -1921,8 +1997,6 @@ function saveSettings() {
 }
 
 function applySettings() {
-  document.body.classList.toggle('light-mode', !settings.darkMode);
-  
   const particlesEl = document.getElementById('particles');
   if (settings.particles) {
     particlesEl.classList.add('active');
@@ -1936,13 +2010,21 @@ function applySettings() {
   const visualizer = document.getElementById('visualizer');
   visualizer.className = 'visualizer ' + settings.visualizerType;
   
-  document.getElementById('darkModeToggle').classList.toggle('active', settings.darkMode);
   document.getElementById('particlesToggle').classList.toggle('active', settings.particles);
   document.getElementById('crossfadeToggle').classList.toggle('active', settings.crossfade);
-  document.getElementById('normalizeToggle').classList.toggle('active', settings.normalize);
   document.getElementById('themeSelect').value = settings.theme || 'purple';
+  document.getElementById('themeModeSelect').value = settings.themeMode || 'simple';
   document.getElementById('visualizerType').value = settings.visualizerType;
   document.getElementById('languageSelect').value = settings.language;
+  const advancedCssEditorEl = document.getElementById('advancedCssEditor');
+  if (settings.themeMode === 'advanced' && (!settings.customCss || !settings.customCss.includes('Advanced theme editor') || !settings.customCss.includes(':root'))) {
+    settings.customCss = buildAdvancedCssTemplate();
+  }
+  if (advancedCssEditorEl) {
+    advancedCssEditorEl.value = settings.customCss || '';
+  }
+  document.getElementById('hideTitleToggle').classList.toggle('active', settings.hideTitle);
+  document.getElementById('hideSubtitleToggle').classList.toggle('active', settings.hideSubtitle);
 
   if (particleCountSlider) particleCountSlider.value = settings.particleCount;
   if (particleCountValue) particleCountValue.textContent = settings.particleCount;
@@ -1950,6 +2032,8 @@ function applySettings() {
   if (particleSizeValue) particleSizeValue.textContent = settings.particleSize;
   
   updateColorPickers();
+  applyHeaderVisibility();
+  updateThemeCustomizationUI();
   
   applyThemeColors();
   
@@ -1980,6 +2064,7 @@ const coverImg = document.getElementById('coverImg');
 const nowTitle = document.getElementById('nowTitle');
 const nowMeta = document.getElementById('nowMeta');
 const playBtn = document.getElementById('playBtn');
+const stopBtn = document.getElementById('stopBtn');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 const shuffleBtn = document.getElementById('shuffleBtn');
@@ -2135,6 +2220,188 @@ function setThemePreset(theme) {
   }
 }
 
+function applyHeaderVisibility() {
+  const titleEl = document.getElementById('appTitle');
+  const subtitleEl = document.getElementById('appSubtitle');
+  if (titleEl) titleEl.style.display = settings.hideTitle ? 'none' : 'block';
+  if (subtitleEl) subtitleEl.style.display = settings.hideSubtitle ? 'none' : 'block';
+}
+
+function buildAdvancedCssTemplate() {
+  const palette = settings.colors || {};
+  const accent = palette.accent || '#6366f1';
+  const accentEnd = palette.accentEnd || palette.accent || accent;
+  const accentHover = palette.accentHover || palette.accent || accent;
+  const particleColor = palette.particleColor || palette.accent || accent;
+  const bgPrimary = palette.bgPrimary || '#0a0e27';
+  const bgSecondary = palette.bgSecondary || '#151a35';
+  const bgTertiary = palette.bgTertiary || '#1e2541';
+  const textPrimary = palette.textPrimary || '#f8fafc';
+  const textSecondary = palette.textSecondary || '#94a3b8';
+
+  return `/* Advanced theme editor: modify only what you understand. Colors are already controlled in the simple picker, while title/subtitle visibility, particle count, and particle size are managed separately. */
+:root {
+  --accent: ${accent};
+  --accent-end: ${accentEnd};
+  --accent-hover: ${accentHover};
+  --accent-light: ${hexToRgba(accent, 0.1)};
+  --accent-shadow: ${hexToRgba(accent, 0.4)};
+  --accent-overlay: ${hexToRgba(accent, 0.15)};
+  --particle-color: ${particleColor};
+  --bg-primary: ${bgPrimary};
+  --bg-secondary: ${bgSecondary};
+  --bg-tertiary: ${bgTertiary};
+  --text-primary: ${textPrimary};
+  --text-secondary: ${textSecondary};
+  --border: rgba(148, 163, 184, 0.1);
+  --shadow: rgba(0, 0, 0, 0.5);
+}
+
+body {
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.header h1 {
+  font-size: 48px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-end) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+  letter-spacing: -1px;
+}
+
+.header p {
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+.settings-btn,
+.control-btn,
+.btn,
+.modal,
+.card,
+.edit-panel,
+.playlist-item,
+.track-item {
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.settings-btn,
+.control-btn,
+.btn {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.settings-btn:hover,
+.control-btn:hover,
+.btn:hover,
+.control-btn.active {
+  background: var(--accent);
+  color: white;
+}
+
+.modal,
+.card,
+.edit-panel {
+  background: var(--bg-secondary);
+  border-radius: 20px;
+}
+
+input,
+select,
+textarea {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--accent-overlay);
+}
+
+.progress-bar input[type=\"range\"]::-webkit-slider-thumb,
+.volume-bar input[type=\"range\"]::-webkit-slider-thumb,
+.speed-bar input[type=\"range\"]::-webkit-slider-thumb {
+  background: var(--accent);
+}
+
+.visualizer-bar {
+  background: linear-gradient(to top, var(--accent), var(--accent-light));
+}`;
+}
+
+function syncAdvancedCssWithColors() {
+  const palette = settings.colors || {};
+  const accent = palette.accent || '#6366f1';
+  const accentEnd = palette.accentEnd || palette.accent || accent;
+  const accentHover = palette.accentHover || palette.accent || accent;
+  const particleColor = palette.particleColor || palette.accent || accent;
+  const bgPrimary = palette.bgPrimary || '#0a0e27';
+  const bgSecondary = palette.bgSecondary || '#151a35';
+  const bgTertiary = palette.bgTertiary || '#1e2541';
+  const textPrimary = palette.textPrimary || '#f8fafc';
+  const textSecondary = palette.textSecondary || '#94a3b8';
+
+  const baseCss = settings.customCss || buildAdvancedCssTemplate();
+  if (!baseCss.includes('Advanced theme editor') || !baseCss.includes(':root')) {
+    settings.customCss = buildAdvancedCssTemplate();
+    if (advancedCssEditor) advancedCssEditor.value = settings.customCss;
+    return settings.customCss;
+  }
+
+  let nextCss = baseCss;
+  const replacements = [
+    ['--accent', accent],
+    ['--accent-end', accentEnd],
+    ['--accent-hover', accentHover],
+    ['--accent-light', hexToRgba(accent, 0.1)],
+    ['--accent-shadow', hexToRgba(accent, 0.4)],
+    ['--accent-overlay', hexToRgba(accent, 0.15)],
+    ['--particle-color', particleColor],
+    ['--bg-primary', bgPrimary],
+    ['--bg-secondary', bgSecondary],
+    ['--bg-tertiary', bgTertiary],
+    ['--text-primary', textPrimary],
+    ['--text-secondary', textSecondary]
+  ];
+
+  replacements.forEach(([name, value]) => {
+    const pattern = new RegExp(`${name}\\s*:\\s*[^;]+;`, 'i');
+    if (pattern.test(nextCss)) {
+      nextCss = nextCss.replace(pattern, `${name}: ${value};`);
+    }
+  });
+
+  settings.customCss = nextCss;
+  if (advancedCssEditor && settings.themeMode === 'advanced') {
+    advancedCssEditor.value = settings.customCss;
+  }
+  return settings.customCss;
+}
+
+function updateThemeCustomizationUI() {
+  const panel = document.getElementById('themeCustomizationControls');
+  const simpleThemeControls = document.getElementById('simpleThemeControls');
+  const advancedThemeControls = document.getElementById('advancedThemeControls');
+  const isCustom = (settings.theme || 'purple') === 'custom';
+  const useAdvanced = isCustom && (settings.themeMode || 'simple') === 'advanced';
+  if (panel) panel.style.display = isCustom ? '' : 'none';
+  if (simpleThemeControls) simpleThemeControls.style.display = isCustom && !useAdvanced ? '' : 'none';
+  if (advancedThemeControls) advancedThemeControls.style.display = isCustom && useAdvanced ? '' : 'none';
+}
+
 function applyThemeColors() {
   const colors = settings.theme && themePresets[settings.theme]
     ? themePresets[settings.theme]
@@ -2142,7 +2409,18 @@ function applyThemeColors() {
 
   if (!colors) return;
 
-  settings.colors = { ...colors };
+  settings.colors = { ...settings.colors, ...colors };
+  if (!customThemeStyleEl) {
+    customThemeStyleEl = document.createElement('style');
+    customThemeStyleEl.id = 'custom-theme-style';
+    document.head.appendChild(customThemeStyleEl);
+  }
+  if (settings.theme === 'custom' && settings.themeMode === 'advanced') {
+    syncAdvancedCssWithColors();
+    customThemeStyleEl.textContent = settings.customCss || '';
+  } else {
+    customThemeStyleEl.textContent = '';
+  }
   const root = document.documentElement;
   root.style.setProperty('--accent', colors.accent);
   root.style.setProperty('--accent-end', colors.accent);
@@ -2184,14 +2462,18 @@ function renderThemeSlotOptions() {
 async function loadThemeSlot(slotId) {
   if (!slotId) return;
   const slot = themeSlots.find(s => s.id === slotId);
-  if (!slot || !slot.colors) return;
-  settings.colors = { ...slot.colors };
+  if (!slot) return;
+  settings.colors = slot.colors ? { ...slot.colors } : { ...settings.colors };
   settings.theme = 'custom';
   settings.themeSlot = slotId;
+  settings.themeMode = slot.themeMode || 'simple';
+  settings.customCss = slot.customCss || '';
   applyThemeColors();
   if (themeSelect) themeSelect.value = 'custom';
   if (themeSlotSelect) themeSlotSelect.value = slotId;
+  if (document.getElementById('advancedCssEditor')) document.getElementById('advancedCssEditor').value = settings.customCss;
   updateColorPickers();
+  updateThemeCustomizationUI();
   saveSettings();
 }
 
@@ -2202,7 +2484,9 @@ async function saveThemeSlot() {
   const theme = {
     id: slotId,
     name: `${t('slotCustom')} ${slotIndex}`,
-    colors: { ...settings.colors }
+    colors: { ...settings.colors },
+    themeMode: settings.themeMode || 'simple',
+    customCss: settings.customCss || ''
   };
   await idbPut('themes', theme);
   await loadThemeSlots();
@@ -2222,7 +2506,10 @@ function hexToRgba(hex, alpha) {
 
 const themeSelect = document.getElementById('themeSelect');
 const themeSlotSelect = document.getElementById('themeSlotSelect');
+const themeModeSelect = document.getElementById('themeModeSelect');
 const saveThemeSlotBtn = document.getElementById('saveThemeSlotBtn');
+const applyAdvancedThemeBtn = document.getElementById('applyAdvancedThemeBtn');
+const advancedCssEditor = document.getElementById('advancedCssEditor');
 const particleCountSlider = document.getElementById('particleCountSlider');
 const particleCountValue = document.getElementById('particleCountValue');
 const particleSizeSlider = document.getElementById('particleSizeSlider');
@@ -2240,11 +2527,46 @@ themeSelect.addEventListener('change', function() {
   settings.themeSlot = null;
   if (this.value !== 'custom') {
     setThemePreset(this.value);
+  } else {
+    settings.themeMode = settings.themeMode || 'simple';
   }
   applyThemeColors();
   updateColorPickers();
+  updateThemeCustomizationUI();
   saveSettings();
 });
+
+if (themeModeSelect) {
+  themeModeSelect.addEventListener('change', function() {
+    settings.themeMode = this.value;
+    settings.theme = 'custom';
+    settings.themeSlot = null;
+    if (this.value === 'advanced') {
+      if (!settings.customCss || !settings.customCss.includes('Advanced theme editor') || !settings.customCss.includes(':root')) {
+        settings.customCss = buildAdvancedCssTemplate();
+      } else {
+        syncAdvancedCssWithColors();
+      }
+      if (advancedCssEditor) advancedCssEditor.value = settings.customCss;
+    }
+    applyThemeColors();
+    updateThemeCustomizationUI();
+    saveSettings();
+  });
+}
+
+if (applyAdvancedThemeBtn) {
+  applyAdvancedThemeBtn.addEventListener('click', function() {
+    settings.customCss = advancedCssEditor ? advancedCssEditor.value : '';
+    settings.theme = 'custom';
+    settings.themeMode = 'advanced';
+    settings.themeSlot = null;
+    themeModeSelect.value = 'advanced';
+    applyThemeColors();
+    updateThemeCustomizationUI();
+    saveSettings();
+  });
+}
 
 function updateColorPickers() {
   const palette = settings.colors || settings.customColors || themePresets[settings.theme] || {};
@@ -2333,9 +2655,17 @@ document.getElementById('crossfadeToggle').addEventListener('click', function() 
   saveSettings();
 });
 
-document.getElementById('normalizeToggle').addEventListener('click', function() {
-  settings.normalize = !settings.normalize;
-  this.classList.toggle('active', settings.normalize);
+document.getElementById('hideTitleToggle').addEventListener('click', function() {
+  settings.hideTitle = !settings.hideTitle;
+  this.classList.toggle('active', settings.hideTitle);
+  applyHeaderVisibility();
+  saveSettings();
+});
+
+document.getElementById('hideSubtitleToggle').addEventListener('click', function() {
+  settings.hideSubtitle = !settings.hideSubtitle;
+  this.classList.toggle('active', settings.hideSubtitle);
+  applyHeaderVisibility();
   saveSettings();
 });
 
@@ -2675,7 +3005,11 @@ function renderLists(){
     const editBtn = document.createElement('button');
     editBtn.className = 'btn btn-secondary btn-small';
     editBtn.textContent = '✏️';
-    editBtn.onclick = (e) => { e.stopPropagation(); loadPlaylist(pl.id, false); showEditPanel(); };
+    editBtn.onclick = async (e) => {
+      e.stopPropagation();
+      await loadPlaylist(pl.id, false);
+      showEditPanel();
+    };
     
     actions.appendChild(openBtn);
     actions.appendChild(editBtn);
@@ -2730,16 +3064,23 @@ createBtn.addEventListener('click', async () => {
 
 async function loadPlaylist(id, autoplay = false) {
   const pl = await idbGet('playlists', id);
-  if (!pl) return alert(t('alertPlaylistNotFound'));
+  if (!pl) {
+    alert(t('alertPlaylistNotFound'));
+    return null;
+  }
   
+  const isSamePlaylist = currentPlaylist?.id === pl.id;
   currentPlaylist = pl;
-  currentIndex = 0;
+  if (!isSamePlaylist || autoplay || currentIndex < 0 || currentIndex >= pl.files.length) {
+    currentIndex = 0;
+  }
   renderLists();
   renderPlaylist();
   await loadCover(pl.coverId);
   searchInput.value = '';
   
   if (autoplay) playIndex(currentIndex);
+  return pl;
 }
 
 async function loadCover(coverId) {
@@ -2817,16 +3158,21 @@ function renderPlaylist() {
       e.stopPropagation();
       const confirmed = await showConfirm(t('confirmDeleteTrack'));
       if (!confirmed) return;
+      const wasCurrent = i === currentIndex;
       currentPlaylist.files.splice(i, 1);
       await idbPut('playlists', currentPlaylist);
       
-      if (i === currentIndex) {
+      if (wasCurrent) {
         audio.pause();
         audio.currentTime = 0;
+        audio.removeAttribute('src');
+        audio.load();
         isPlaying = false;
         playBtn.textContent = '▶';
         currentIndex = -1;
         nowTitle.textContent = t('selectTrack');
+      } else if (i < currentIndex) {
+        currentIndex -= 1;
       }
       
       renderPlaylist();
@@ -2951,15 +3297,7 @@ async function playIndex(i) {
   nowMeta.textContent = fileRecord.type || fileRecord.blob.type || 'unknown';
   renderPlaylist();
   
-  if (settings.normalize) {
-    audio.volume = 0.8;
-    volumeSlider.value = 80;
-    volumeValue.textContent = '80%';
-    updateVolumeIcon(0.8);
-  } else {
-    audio.volume = volumeSlider.value / 100;
-  }
-  
+  audio.volume = volumeSlider.value / 100;
   audio.playbackRate = speedSlider.value / 100;
   
   updateMediaSession(fileRef.name, currentPlaylist.name, currentCoverUrl);
@@ -3000,6 +3338,13 @@ audio.addEventListener('timeupdate', () => {
 });
 
 audio.addEventListener('ended', () => {
+  if (currentIndex < 0 || !currentPlaylist?.files?.[currentIndex]) {
+    audio.pause();
+    audio.currentTime = 0;
+    isPlaying = false;
+    playBtn.textContent = '▶';
+    return;
+  }
   if (repeatOne) return playIndex(currentIndex);
   if (shuffle) {
     if (!currentPlaylist || !currentPlaylist.files?.length) return;
@@ -3039,6 +3384,34 @@ function togglePlay() {
 }
 
 playBtn.addEventListener('click', () => togglePlay());
+
+function clearCurrentPlayback() {
+  audio.pause();
+  audio.removeAttribute('src');
+  audio.load();
+  audio.currentTime = 0;
+  currentIndex = -1;
+  isPlaying = false;
+  playBtn.textContent = '▶';
+  if (currentCoverUrl) {
+    URL.revokeObjectURL(currentCoverUrl);
+    currentCoverUrl = null;
+  }
+  currentPlaylist = null;
+  coverImg.src = '';
+  nowTitle.textContent = t('selectPlaylist');
+  nowMeta.textContent = '';
+  seek.max = 0;
+  seek.value = 0;
+  curTime.textContent = '0:00';
+  durTime.textContent = '0:00';
+  renderLists();
+  renderPlaylist();
+}
+
+stopBtn.addEventListener('click', () => {
+  clearCurrentPlayback();
+});
 
 prevBtn.addEventListener('click', () => {
   if (!currentPlaylist) return;
@@ -3114,6 +3487,8 @@ function showEditPanel() {
   }
   editPanel.classList.add('show');
   editName.value = currentPlaylist.name || '';
+  editCover.value = '';
+  editFiles.value = '';
 }
 
 editListBtn.addEventListener('click', () => showEditPanel());
