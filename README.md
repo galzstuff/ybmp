@@ -18,7 +18,8 @@ to start, head over to galzstuff.github.io/ybmp OR download the index.html file 
 - languages (spanish & english, probably more coming soon)
 - clean UI :D
 - themes
-- more coming in the future! (*discord compatibility via PREMiD is in the works!*)
+- Discord status via PreMiD extension compatibility (head over [here](https://github.com/galzstuff/ybmp-beta/tree/premid-files) to start!)
+- more coming in the future!
 
 ## about beta access:
 ~~download betas/unstable versions from the releases page under the beta tags or visit galzstuff.github.io/ybmp-beta to access the latest beta w/out losing stuff from the stable version (though it may be updated less than the standard version here)~~ head over to https://github.com/galzstuff/ybmp-beta to download a beta html (or whatever other thing i am experimenting on thats compatible with the player) or https://galzstuff.github.io/ybmp-beta (even tho all contents may and/or will be less stable as on here - your choice, tho'!)
