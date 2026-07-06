@@ -2522,6 +2522,31 @@ const bgSecondaryPicker = document.getElementById('bgSecondaryPicker');
 const bgTertiaryPicker = document.getElementById('bgTertiaryPicker');
 const textPrimaryPicker = document.getElementById('textPrimaryPicker');
 const textSecondaryPicker = document.getElementById('textSecondaryPicker');
+let inputFocusActive = false;
+
+function setPlaybackControlsEnabled(enabled) {
+  const controlButtons = document.querySelectorAll('.control-btn');
+  controlButtons.forEach(btn => {
+    btn.disabled = !enabled;
+  });
+}
+
+function updateInputFocusState(isFocused) {
+  inputFocusActive = isFocused;
+  setPlaybackControlsEnabled(!isFocused);
+}
+
+document.addEventListener('focusin', (e) => {
+  if (e.target.matches('input[type="text"]:not(.keymap-input), input[type="search"], textarea')) {
+    updateInputFocusState(true);
+  }
+});
+
+document.addEventListener('focusout', (e) => {
+  if (e.target.matches('input[type="text"]:not(.keymap-input), input[type="search"], textarea')) {
+    updateInputFocusState(false);
+  }
+});
 
 themeSelect.addEventListener('change', function() {
   settings.theme = this.value;
@@ -2716,7 +2741,8 @@ document.addEventListener('keydown', (e) => {
     saveSettings();
     return;
   }
-  
+
+  if (inputFocusActive) return;
   if (e.target.tagName === 'INPUT' && e.target.type === 'text' && !e.target.classList.contains('keymap-input')) return;
   
   if (e.key === settings.keymap.playpause) {
